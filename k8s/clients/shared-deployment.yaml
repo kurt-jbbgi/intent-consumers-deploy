@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-worker
+  name: shared-worker
   namespace: shared
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: client-worker
+      app: shared-worker
   template:
     metadata:
       labels:
-        app: client-worker
+        app: shared-worker
     spec:
       imagePullSecrets:
         - name: intent-consumers
       containers:
-        - name: client-worker
+        - name: shared-worker
           image: registry.digitalocean.com/intent-consumers/nih-worker:latest
           resources:
             requests:
