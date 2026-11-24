@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-worker
+  namespace: scilogex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-worker
+  template:
+    metadata:
+      labels:
+        app: client-worker
+    spec:
+      imagePullSecrets:
+        - name: intent-consumers
+      containers:
+        - name: client-worker
+          image: registry.digitalocean.com/intent-consumers/nih-worker:latest
+          resources:
+            requests:
+              memory: 160Mi
+            limits:
+              memory: 400Mi  # about 4x the measured idle (100 MB), for busy signal days
+          command: ["python", "signals/client_worker.py"]
+          envFrom:
+            - secretRef:
+                name: app-env
+          env:
+            - name: CLIENT_SLUG
+              value: "scilogex"
+            - name: LOOPS
+              value: "icp,nih_enrichment,webvisitor_sequence,webvisitor_enrichment"
+            - name: POLL_INTERVAL_SECONDS
+              value: "10"

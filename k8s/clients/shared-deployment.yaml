@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-worker
+  namespace: shared
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-worker
+  template:
+    metadata:
+      labels:
+        app: client-worker
+    spec:
+      imagePullSecrets:
+        - name: intent-consumers
+      containers:
+        - name: client-worker
+          image: registry.digitalocean.com/intent-consumers/nih-worker:latest
+          resources:
+            requests:
+              memory: 128Mi
+            limits:
+              memory: 300Mi  # about 4x the measured idle (72 MB), for busy signal days
+          command: ["python", "signals/client_worker.py"]
+          envFrom:
+            - secretRef:
+                name: app-env
+          env:
+            - name: LOOPS  # no CLIENT_SLUG: these loops work on tables shared by all clients
+              value: "clia_enrichment,clia_sequence,job_posting_enrichment,linkedin_enrichment,linkedin_sequence"
+            - name: POLL_INTERVAL_SECONDS
+              value: "10"
