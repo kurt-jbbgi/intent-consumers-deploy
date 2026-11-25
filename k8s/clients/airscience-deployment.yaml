@@ -31,6 +31,6 @@ spec:
             - name: CLIENT_SLUG
               value: "airscience"
             - name: LOOPS
-              value: "icp,clia_search,job_posting,nih_awards,nih_enrichment,webvisitor_enrichment"
+              value: "icp,clia_search,job_posting,nih_awards"
             - name: POLL_INTERVAL_SECONDS
               value: "10"

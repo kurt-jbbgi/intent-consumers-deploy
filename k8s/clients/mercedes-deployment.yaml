@@ -31,6 +31,6 @@ spec:
             - name: CLIENT_SLUG
               value: "mercedes"
             - name: LOOPS
-              value: "icp,clia_search,job_posting,nih_sequence,nih_enrichment,webvisitor_sequence,webvisitor_enrichment"
+              value: "icp,clia_search,job_posting"
             - name: POLL_INTERVAL_SECONDS
               value: "10"

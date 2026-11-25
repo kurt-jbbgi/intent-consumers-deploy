@@ -31,6 +31,6 @@ spec:
             - name: CLIENT_SLUG
               value: "scilogex"
             - name: LOOPS
-              value: "icp,nih_enrichment,webvisitor_sequence,webvisitor_enrichment"
+              value: "icp"
             - name: POLL_INTERVAL_SECONDS
               value: "10"

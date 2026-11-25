@@ -29,6 +29,6 @@ spec:
                 name: app-env
           env:
             - name: LOOPS  # no CLIENT_SLUG: these loops work on tables shared by all clients
-              value: "clia_enrichment,clia_sequence,job_posting_enrichment,linkedin_enrichment,linkedin_sequence"
+              value: "clia_enrichment,clia_sequence,job_posting_enrichment,linkedin_enrichment,linkedin_sequence,nih_enrichment,nih_sequence,webvisitor_enrichment,webvisitor_sequence"
             - name: POLL_INTERVAL_SECONDS
               value: "10"
